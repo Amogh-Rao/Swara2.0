@@ -1,0 +1,14 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Database
+swara.db
+
+# Node
+node_modules/
+
+# Editor/OS junk
+.vscode/
+.DS_Store

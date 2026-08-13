@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Filter</title>
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+</head>
+<body class="font-notoserif h-screen w-screen flex items-center bg-rose flex-col">
+        {%include "_navbar.html"%}
+        <img class="mt-14 mb-25 w-30 rounded-full border-5"src="{{ url_for('static', filename='randomnote.png') }}">
+        <div class="fixed top-6 left-1/2 -translate-x-1/2 z-50">
+        {% for message in get_flashed_messages() %}
+            <p class="bg-saffron text-alabaster px-4 py-2 rounded shadow-lg">{{ message }}</p>
+        {% endfor %}
+        </div>
+
+        
+        <form action="/filter" method="get" class="flex flex-col flex-wrap items-center gap-25">
+            <div class="flex flex-row gap-15">
+                <div class="flex flex-col items-center px-8 py-3 bg-alabaster rounded shadow-lg">
+                    <h1 class=" text-4xl mb-2">Ragam</h1>
+                    <input class="text-alabaster py-2 px-4 bg-gray-600 rounded" type="text" name="Ragam">
+                </div>
+                <div class="flex flex-col items-center px-8 py-3 bg-alabaster rounded shadow-lg">
+                    <h1 class=" text-4xl mb-2">Talam</h1>
+                    <input class="text-alabaster py-2 px-4 bg-gray-600 rounded" type="text" name="Talam">
+                </div>
+                <div class="flex flex-col items-center px-8 py-3 bg-alabaster rounded shadow-lg">
+                    <h1 class=" text-4xl mb-2">Composer</h1>
+                    <input class="text-alabaster py-2 px-4 bg-gray-600 rounded" type="text" name="Composer">
+                </div>
+            </div>
+            <div class="flex flex-row gap-15">
+                <div class="flex flex-col items-center px-8 py-3 bg-alabaster rounded shadow-lg">
+                    <h1 class=" text-4xl mb-2">Deity</h1>
+                    <input class="text-alabaster py-2 px-4 bg-gray-600 rounded" type="text" name="Deity">
+                </div>
+                <div class="flex flex-col items-center px-8 py-3 bg-alabaster rounded shadow-lg">
+                    <h1 class=" text-4xl mb-2">Song Type</h1>
+                    <input class="text-alabaster py-2 px-4 bg-gray-600 rounded" type="text" name="Type">
+                </div>
+            </div>
+
+            <button class="bg-alabaster -mt-10 py-1 text-lg rounded-full text-black w-40" type="submit">Filter</button>
+
+ 
+        </form>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Songs</title>
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+</head>
+<body class="font-notoserif min-h-screen w-screen bg-rose">
+    {% include "_navbar.html" %}
+
+    <div class="fixed top-20 left-1/2 -translate-x-1/2 z-50">
+        {% for message in get_flashed_messages() %}
+            <p class="bg-saffron text-alabaster px-4 py-2 rounded shadow-lg">{{ message }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 py-10">
+
+        <div class="bg-alabaster rounded shadow-lg p-6 mb-10">
+            <h2 class="text-2xl mb-4">Add a Song</h2>
+            <form method="post" action="/songs/add" class="grid grid-cols-2 gap-4">
+                <input class="py-2 px-4 bg-gray-600 text-alabaster rounded" type="text" name="title" placeholder="Title" required>
+                <input class="py-2 px-4 bg-gray-600 text-alabaster rounded" type="text" name="ragam" placeholder="Ragam">
+                <input class="py-2 px-4 bg-gray-600 text-alabaster rounded" type="text" name="talam" placeholder="Talam">
+                <input class="py-2 px-4 bg-gray-600 text-alabaster rounded" type="text" name="composer" placeholder="Composer">
+                <input class="py-2 px-4 bg-gray-600 text-alabaster rounded" type="text" name="deity" placeholder="Deity">
+                <input class="py-2 px-4 bg-gray-600 text-alabaster rounded" type="text" name="song_type" placeholder="Song Type">
+                <button class="col-span-2 bg-rose text-alabaster py-2 rounded-full text-lg hover:bg-saffron" type="submit">Add Song</button>
+            </form>
+        </div>
+
+        <div class="bg-alabaster rounded shadow-lg p-6 mb-10">
+            <h2 class="text-2xl mb-4">Import from CSV</h2>
+            <p class="text-sm mb-3">Columns expected: title, ragam, talam, composer, deity, song_type</p>
+            <form method="post" action="/songs/import" enctype="multipart/form-data" class="flex items-center gap-4">
+                <input type="file" name="csv_file" accept=".csv" required>
+                <button class="bg-rose text-alabaster px-6 py-2 rounded-full hover:bg-saffron" type="submit">Import</button>
+            </form>
+        </div>
+
+        <div class="bg-alabaster rounded shadow-lg p-6">
+            <h2 class="text-2xl mb-4">Your Songs</h2>
+            {% if songs|length == 0 %}
+                <p>No songs yet — add one above or import a CSV.</p>
+            {% else %}
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="border-b-2 border-rose">
+                            <th class="py-2">Title</th>
+                            <th class="py-2">Ragam</th>
+                            <th class="py-2">Talam</th>
+                            <th class="py-2">Composer</th>
+                            <th class="py-2">Deity</th>
+                            <th class="py-2">Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for song in songs %}
+                        <tr class="border-b border-gray-300">
+                            <td class="py-2">{{ song.title }}</td>
+                            <td class="py-2">{{ song.ragam }}</td>
+                            <td class="py-2">{{ song.talam }}</td>
+                            <td class="py-2">{{ song.composer }}</td>
+                            <td class="py-2">{{ song.deity }}</td>
+                            <td class="py-2">{{ song.song_type }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+
+    </div>
+</body>
+</html>

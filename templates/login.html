@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Log In</title>
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+</head>
+<body class="h-screen w-screen flex justify-center items-center bg-rose flex-col">
+    <a href="/welcome" class="absolute top-4 right-4 bg-alabaster text-black px-3 py-1 rounded shadow hover:bg-saffron font-notoserif">Back</a>
+    <div class="flex items-center w-[30rem] h-[41rem] bg-alabaster rounded-sm shadow-lg font-notoserif flex-col">
+        <img class="mt-14 mb-12 w-40 rounded-full border-5"src="{{ url_for('static', filename='randomnote.png') }}">
+        <div class="fixed top-6 left-1/2 -translate-x-1/2 z-50">
+        {% for message in get_flashed_messages() %}
+            <p class="bg-saffron text-alabaster px-4 py-2 rounded shadow-lg">{{ message }}</p>
+        {% endfor %}
+        </div>
+        <h1 class="text-5xl mb-12">Log In</h1>
+        <form method="post" class="flex flex-col items-center gap-10">
+            <input class="text-alabaster py-2 px-4 bg-gray-600 rounded " type="text" name="email" placeholder="Email">
+            <input class="text-alabaster py-2 px-4 bg-gray-600 rounded " type="password" name="password" placeholder="Password">
+            <button class="bg-rose py-1 rounded-full text-alabaster w-40" type="submit">Log In</button>
+            <a href="/pwdreset" class="text-xl hover-underline">Forgot Password?</a>
+        </form>
+
+    </div>
+</body>
+</html>

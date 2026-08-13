@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Results</title>
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+</head>
+<body class="font-notoserif min-h-screen w-screen bg-rose pb-16">
+    {%include "_navbar.html"%}
+
+    <div class="fixed top-6 left-1/2 -translate-x-1/2 z-50">
+        {% for message in get_flashed_messages() %}
+            <p class="bg-saffron text-alabaster px-4 py-2 rounded shadow-lg">{{ message }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="flex justify-center pt-6">
+        <img class="w-24 rounded-full border-4" src="{{ url_for('static', filename='randomnote.png') }}">
+    </div>
+
+    <form method="get" action="/filter">
+        <div class="flex flex-row justify-center gap-4 mt-6 flex-wrap px-4">
+            <div class="flex flex-col items-center px-4 py-2 bg-alabaster rounded shadow-lg">
+                <h1 class="text-sm mb-1">Ragam</h1>
+                <input class="text-alabaster py-1 px-3 bg-gray-600 rounded text-sm" type="text" name="Ragam" value="{{ request.args.get('Ragam', '') }}">
+            </div>
+            <div class="flex flex-col items-center px-4 py-2 bg-alabaster rounded shadow-lg">
+                <h1 class="text-sm mb-1">Talam</h1>
+                <input class="text-alabaster py-1 px-3 bg-gray-600 rounded text-sm" type="text" name="Talam" value="{{ request.args.get('Talam', '') }}">
+            </div>
+            <div class="flex flex-col items-center px-4 py-2 bg-alabaster rounded shadow-lg">
+                <h1 class="text-sm mb-1">Composer</h1>
+                <input class="text-alabaster py-1 px-3 bg-gray-600 rounded text-sm" type="text" name="Composer" value="{{ request.args.get('Composer', '') }}">
+            </div>
+            <div class="flex flex-col items-center px-4 py-2 bg-alabaster rounded shadow-lg">
+                <h1 class="text-sm mb-1">Subject</h1>
+                <input class="text-alabaster py-1 px-3 bg-gray-600 rounded text-sm" type="text" name="Deity" value="{{ request.args.get('Deity', '') }}">
+            </div>
+            <div class="flex flex-col items-center px-4 py-2 bg-alabaster rounded shadow-lg">
+                <h1 class="text-sm mb-1">Song Type</h1>
+                <input class="text-alabaster py-1 px-3 bg-gray-600 rounded text-sm" type="text" name="Type" value="{{ request.args.get('Type', '') }}">
+            </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto mt-8 px-4">
+            <button type="button" class="flex items-center gap-2 text-xl mb-4">
+                Sort By
+                <!-- icon placeholder, swap for your actual sort icon -->
+                <span>&#9776;</span>
+            </button>
+
+            <h1 class="text-5xl mb-4">RESULTS</h1>
+
+            {% if songs|length == 0 %}
+                <p class="text-xl">No songs found.</p>
+            {% endif %}
+
+            {% for song in songs %}
+                <div class="mb-5">
+                    <h2 class="text-3xl">{{ song.title }}</h2>
+                    <div class="flex flex-row gap-2 mt-1 flex-wrap">
+                        {% if song.ragam %}<span class="bg-alabaster text-black px-3 py-1 rounded-full text-sm">{{ song.ragam }}</span>{% endif %}
+                        {% if song.talam %}<span class="bg-alabaster text-black px-3 py-1 rounded-full text-sm">{{ song.talam }}</span>{% endif %}
+                        {% if song.composer %}<span class="bg-alabaster text-black px-3 py-1 rounded-full text-sm">{{ song.composer }}</span>{% endif %}
+                        {% if song.deity %}<span class="bg-alabaster text-black px-3 py-1 rounded-full text-sm">{{ song.deity }}</span>{% endif %}
+                        {% if song.song_type %}<span class="bg-alabaster text-black px-3 py-1 rounded-full text-sm">{{ song.song_type }}</span>{% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="flex justify-center mt-8">
+            <button class="bg-alabaster py-1 px-6 text-2xl rounded-full text-black" type="submit">Re-filter</button>
+        </div>
+    </form>
+</body>
+</html>

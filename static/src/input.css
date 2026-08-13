@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
+
+@theme {
+    --color-rose: #904E55;
+    --color-saffron: #F39237;
+    --color-alabaster: #F2EFE9;
+    --font-notoserif: "Noto Serif", serif;
+}

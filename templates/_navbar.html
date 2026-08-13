@@ -1,0 +1,13 @@
+<nav class="w-full bg-alabaster shadow-md px-6 py-3 flex items-center justify-between font-notoserif">
+    <div class="flex items-center gap-2">
+        <img class="w-10 h-10 rounded-full border-2" src="{{ url_for('static', filename='randomnote.png') }}">
+        <span class="text-2xl font-bold">Swara</span>
+    </div>
+    <div class="flex items-center gap-6 text-lg">
+        <a href="/songs" class="hover:text-saffron">Songs</a>
+        <a href="/" class="hover:text-saffron">Filter</a>
+        <a href="/leaderboard" class="hover:text-saffron">Leaderboard</a>
+        <a href="/plog" class="hover:text-saffron">Practice Log</a>
+        <a href="/logout" class="bg-rose text-alabaster px-4 py-1 rounded shadow hover:bg-saffron">Log Out</a>
+    </div>
+</nav>
