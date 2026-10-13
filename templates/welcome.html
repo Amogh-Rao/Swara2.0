@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Welcome</title>
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+</head>
+<body class="h-screen w-screen flex items-center bg-rose flex-col">
+    <div class="flex justify-end w-screen h-[10vh] ">
+        <h1>header placeholder</h1>
+    </div>
+    <div class="flex h-[40vh] justify-end items-center flex-col">
+        <img class="mb-4 w-40 rounded-full border-5"src="{{ url_for('static', filename='randomnote.png') }}">
+        <h1 class=" text-6xl font-bold font-notoserif">WELCOME</h1>
+    </div>
+    <div class="flex w-2/4 text-3xl items-center justify-evenly mt-5 font-notoserif">
+        <a href="/register" class="bg-alabaster w-[20vw] px-4 py-2 rounded text-center border-2 hover:bg-saffron">Register</a>
+        <a href="/login" class="bg-alabaster w-[20vw] px-4 py-2 rounded border-2 text-center hover:bg-saffron">Log In</a>
+    </div>
+</body>
+</html>

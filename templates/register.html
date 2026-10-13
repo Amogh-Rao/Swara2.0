@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+</head>
+<body class="h-screen w-screen flex justify-center items-center bg-rose flex-col">
+    <a href="/welcome" class="absolute top-4 right-4 bg-alabaster text-black px-3 py-1 rounded shadow hover:bg-saffron font-notoserif">Back</a>
+    <div class="flex items-center w-[30rem] h-[41rem] bg-alabaster rounded-sm shadow-lg font-notoserif flex-col">
+        <img class="mt-14 mb-2 w-40 rounded-full border-5"src="{{ url_for('static', filename='randomnote.png') }}">
+        <div class="fixed top-6 left-1/2 -translate-x-1/2 z-50">
+        {% for message in get_flashed_messages() %}
+            <p class="bg-saffron text-alabaster px-4 py-2 rounded shadow-lg">{{ message }}</p>
+        {% endfor %}
+        </div>
+        <h1 class="text-6xl">Register</h1>  
+        <form class="flex flex-col items-center mt-4" method="post">
+            <h2 class="text-lg">*Please enter your first name.</h2>
+            <input class="text-alabaster py-2 px-4 bg-gray-600 rounded " type="text" name="first_name" placeholder="First Name">
+            <h2 class="text-lg">*Please enter your last name.</h2>
+            <input class="text-alabaster py-2 px-4 bg-gray-600 rounded " type="text" name="last_name" placeholder="Last Name">
+            <h2 class="text-lg">*Please enter your password.</h2>
+            <input class="text-alabaster py-2 px-4 bg-gray-600 rounded " type="password" name="password" placeholder="Password">
+            <h2 class="text-lg">*Please enter your email address.</h2>
+            <input class="text-alabaster py-2 px-4 bg-gray-600 rounded " type="text" name="email" placeholder="Email Address">
+            <button class=" mt-3 py-1 bg-rose rounded-full text-alabaster w-40" type="submit">Register</button>
+        </form>
+        <div class="flex flex-row gap-1">
+            <p>Have an account?</p>
+            <a class="underline" href="/login"> Log In</a>
+        </div>
+
+    </div>
+</body>
+</html>
