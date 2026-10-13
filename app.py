@@ -1,4 +1,3 @@
-import re
 import csv
 import io
 import os
@@ -21,7 +20,14 @@ def get_db():
 
 
 def is_valid_email(email):
-    return re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", email) is not None
+    if not email or "@" not in email:
+        return False
+    local_part, _, domain = email.rpartition("@")
+    if not local_part or not domain or "." not in domain:
+        return False
+    if any(char.isspace() for char in email):
+        return False
+    return True
 
 
 def login_required(f):
@@ -267,4 +273,4 @@ def add_practice():
     return redirect("/plog")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=os.environ.get("FLASK_DEBUG") == "1")
