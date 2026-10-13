@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Songs</title>
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+</head>
+<body class="font-notoserif min-h-screen w-screen bg-rose">
+    {% include "_navbar.html" %}
+
+    <div class="fixed top-20 left-1/2 -translate-x-1/2 z-50">
+        {% for message in get_flashed_messages() %}
+            <p class="bg-saffron text-alabaster px-4 py-2 rounded shadow-lg">{{ message }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 py-10">
+
+        <div class="bg-alabaster rounded shadow-lg p-6 mb-10">
+            <h2 class="text-2xl mb-4">Practice Entry {{ date }}</h2>
+            <form method="post" action="/plog/add" class="grid gap-4">
+                <input class="py-4 px-4 bg-gray-600 text-alabaster rounded" type="text" name="entry" placeholder="Today I worked on..." required>
+                <input class="py-4 px-4 bg-gray-600 text-alabaster rounded" type="text" name="songs" placeholder="Shakti Sahita, Brochevarevare" required>
+                <button class="col-span-2 bg-rose text-alabaster py-2 rounded-full text-lg hover:bg-saffron" type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class="bg-alabaster rounded shadow-lg p-6">
+            <h2 class="text-2xl mb-4">Practice Entries</h2>
+            {% if entries|length == 0 %}
+                <p>No entries yet — add one above.</p>
+            {% else %}
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="border-b-2 border-rose">
+                            <th class="py-2">Entry</th>
+                            <th class="py-2">Songs</th>
+                            <th class="py-2">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in entries %}
+                        <tr class="border-b border-gray-300">
+                            <td class="py-2">{{ entry.entry }}</td>
+                            <td class="py-2">{{ entry.songs }}</td>
+                            <td class="py-2">{{ entry.date }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+
+    </div>
+</body>
+</html>
